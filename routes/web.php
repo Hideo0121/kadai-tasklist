@@ -7,5 +7,5 @@ use App\Http\Controllers\TasksController;
 （コメント部分は省略）
 */
 
-Route::get('/', [TaskController::class, 'index']);
-Route::resource('tasks', TaskssController::class);
+Route::get('/', [TasksController::class, 'index']);
+Route::resource('tasks', TasksController::class);
