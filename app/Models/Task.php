@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $fillable = ['content'];
+    // protected $fillable = ['content'];
+    protected $guarded = [
+        'id',
+        'email',
+        'password'
+    ];
 }

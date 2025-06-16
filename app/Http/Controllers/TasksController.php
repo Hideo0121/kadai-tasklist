@@ -24,7 +24,12 @@ class TasksController extends Controller
             'content' => 'required|max:255',
         ]);
 
-        Task::create($validated);
+        // Task::create($validated); // create は新しいレコードを追加します
+
+        $task  = new Task();                        // 空レコードを追加して
+        $task->content = $validated['content'];     // content カラムに値をセット
+        $task->save();                              // save でデータベースに保存します
+
         return redirect()->route('tasks.index')->with('success', 'タスクを作成しました');
     }
 
