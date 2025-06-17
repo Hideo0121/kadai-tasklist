@@ -22,12 +22,14 @@ class TasksController extends Controller
     {
         $validated = $request->validate([
             'content' => 'required|max:255',
+            'status' => 'required|max:10', // ステータスのバリデーションを追加
         ]);
 
         // Task::create($validated); // create は新しいレコードを追加します
 
         $task  = new Task();                        // 空レコードを追加して
         $task->content = $validated['content'];     // content カラムに値をセット
+        $task->status = $validated['status'];       // status カラムに値をセット、デフォルトは「未着手」
         $task->save();                              // save でデータベースに保存します
 
         return redirect()->route('tasks.index')->with('success', 'タスクを作成しました');
@@ -49,6 +51,7 @@ class TasksController extends Controller
     {
         $validated = $request->validate([
             'content' => 'required|max:255',
+            'status' => 'required|max:10', // ステータスのバリデーションを追加
         ]);
 
         $task = Task::findOrFail($id);

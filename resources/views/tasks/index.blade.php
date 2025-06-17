@@ -24,13 +24,15 @@
                 <thead class="table-primary">
                     <tr>
                         <th style="width: 70%">📌 内容</th>
-                        <th style="width: 30%">🔧 操作</th>
+                        <th style="width: 15%">⏰ 状態</th>
+                        <th style="width: 15%">🔧 操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tasks as $task)
                         <tr>
                             <td class="text-start">{{ \Illuminate\Support\Str::limit($task->content, 50) }}</td>
+                            <td>{{ $task->status }}</td>
                             <td>
                                 <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-sm btn-outline-primary me-1">
                                     <i class="bi bi-eye"></i>

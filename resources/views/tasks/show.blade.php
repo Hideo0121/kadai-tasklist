@@ -7,7 +7,7 @@
 
     <div class="card shadow-sm rounded mb-3">
         <div class="card-body">
-            <p class="fs-5">{{ $task->content }}</p>
+            <p class="fs-5">{{ $task->content }}：{{ $task->status }}</p>
             <p class="text-muted small">
                 作成日時：{{ $task->created_at->format('Y/m/d H:i') }}
             </p>

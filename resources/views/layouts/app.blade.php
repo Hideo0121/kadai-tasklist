@@ -7,27 +7,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
+    {{-- ナビゲーションバー --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <a class="navbar-brand" href="{{ route('tasks.index') }}">Task Manager</a>
         </div>
     </nav>
 
-    <div class="container mx-auto">
-        {{-- エラーメッセージ --}}
-        @include('commons.error_messages')
-
-        {{-- @yield('content') --}}
-    </div>
-
+    {{-- メインコンテンツのコンテナ --}}
     <div class="container">
+        {{-- 成功メッセージ --}}
         @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success mt-4">{{ session('success') }}</div>
         @endif
 
-        @yield('content')    {{-- section('content')の内容をここに挿入 --}}
+        {{-- エラーメッセージ --}}
+        {{-- @include('components.error_messages')  --}}
+
+        {{-- 各ページの内容がここに入る --}}
+        @yield('content')
     </div>
 
-
+    {{-- Bootstrap JS（必要であれば） --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

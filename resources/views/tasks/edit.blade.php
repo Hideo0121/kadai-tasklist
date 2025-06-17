@@ -16,9 +16,25 @@
                 id="content"
                 name="content"
                 value="{{ old('content', $task->content) }}"
-                required>
+                placeholder="例）買い物に行く">
             @error('content')
-                <div class="invalid-feedback">{{ $message }}</div>
+                <div class="invalid-feedback">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i> {{-- Bootstrap Iconsのクラスを追加 --}}
+                    {{ $message }}
+                </div>
+            @enderror
+            <label for="status" class="form-label fw-semibold">状況</label>
+            <input type="text"
+                class="form-control rounded-pill @error('status') is-invalid @enderror"
+                id="status"
+                name="status"
+                value="{{ old('status', $task->status) }}"
+                placeholder="例）未着手">
+            @error('status')
+                <div class="invalid-feedback">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i> {{-- Bootstrap Iconsのクラスを追加 --}}
+                    {{ $message }}
+                </div>
             @enderror
         </div>
 
