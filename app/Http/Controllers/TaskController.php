@@ -8,10 +8,12 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::where('user_id', Auth::id())->get();
-        return view('tasks.index', compact('tasks'));
+        $perPage = $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 15]) ? $perPage : 10;
+        $tasks = Task::where('user_id', Auth::id())->paginate($perPage)->appends(['per_page' => $perPage]);
+        return view('tasks.index', compact('tasks', 'perPage'));
     }
 
     public function create()

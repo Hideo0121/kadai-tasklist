@@ -14,9 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $user = \App\Models\User::updateOrCreate(
+            [ 'email' => 'test@test.com' ],
+            [
+                'name' => 'テストユーザ',
+                'password' => bcrypt('password'),
+            ]
+        );
+
+        // タスクを10件作成
+        for ($i = 1; $i <= 10; $i++) {
+            \App\Models\Task::updateOrCreate(
+                [ 'user_id' => $user->id, 'content' => "サンプルタスク{$i}" ],
+                [ 'status' => '未着手' ]
+            );
+        }
     }
 }
