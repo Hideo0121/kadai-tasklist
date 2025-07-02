@@ -1,23 +1,42 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TasksController;
 
 /*
-（コメント部分は省略）
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
 */
 
-Route::get('/', [TasksController::class, 'index']);
-Route::resource('tasks', TasksController::class);
 
-/*
-Route::get('/test-dom', function () {
-    try {
-        $dom = new \DOMDocument();
-        return 'DOMDocument is available';
-    } catch (\Throwable $e) {
-        return 'Error: ' . $e->getMessage();
+use App\Http\Controllers\TaskController;
+Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('tasks.index');
     }
+    return redirect()->route('login');
 });
 
-*/
+Route::middleware('auth')->group(function () {
+    Route::resource('tasks', TaskController::class);
+    // ...既存のprofileルート...
+});
+
+
+Route::get('/dashboard', function () {
+    return redirect()->route('tasks.index');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

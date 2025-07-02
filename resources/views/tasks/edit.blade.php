@@ -1,48 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="fw-bold text-warning mb-4">
-        <i class="bi bi-pencil-square me-2"></i>タスク編集
-    </h2>
-
-    <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="mb-3">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-            <label for="content" class="form-label fw-semibold">タスク内容</label>
-            <input type="text"
-                class="form-control rounded-pill @error('content') is-invalid @enderror"
-                id="content"
-                name="content"
-                value="{{ old('content', $task->content) }}"
-                placeholder="例）買い物に行く">
-            @error('content')
-                <div class="invalid-feedback">
-                    <i class="bi bi-exclamation-circle-fill me-2"></i> {{-- Bootstrap Iconsのクラスを追加 --}}
-                    {{ $message }}
-                </div>
-            @enderror
-            <label for="status" class="form-label fw-semibold">状況</label>
-            <input type="text"
-                class="form-control rounded-pill @error('status') is-invalid @enderror"
-                id="status"
-                name="status"
-                value="{{ old('status', $task->status) }}"
-                placeholder="例）未着手">
-            @error('status')
-                <div class="invalid-feedback">
-                    <i class="bi bi-exclamation-circle-fill me-2"></i> {{-- Bootstrap Iconsのクラスを追加 --}}
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <button type="submit" class="btn btn-warning rounded-pill px-4 shadow-sm">
-            <i class="bi bi-check-lg me-1"></i> 更新
-        </button>
-        <a href="{{ route('tasks.index') }}" class="btn btn-outline-secondary rounded-pill ms-2 px-4">
-            戻る
-        </a>
-    </form>
+    <div class="max-w-xl mx-auto mt-10 bg-white p-8 rounded shadow floating-card">
+        <h2 class="text-xl font-bold text-yellow-600 mb-6 flex items-center">
+            <img src="/images/logo.jpg" alt="ロゴ" class="h-7 w-7 mr-2">タスク編集
+        </h2>
+        <form action="{{ route('tasks.update', $task->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="mb-4">
+                <label for="content" class="block font-semibold mb-1">タスク内容</label>
+                <input type="text" id="content" name="content" value="{{ old('content', $task->content) }}" placeholder="例）買い物に行く"
+                    class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('content') border-red-500 @enderror" autofocus>
+                @error('content')
+                    <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="status" class="block font-semibold mb-1">状況</label>
+                <input type="text" id="status" name="status" value="{{ old('status', $task->status) }}" placeholder="例）未着手"
+                    class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('status') border-red-500 @enderror">
+                @error('status')
+                    <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded shadow">更新</button>
+                <a href="{{ route('tasks.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded shadow">戻る</a>
+            </div>
+        </form>
+    </div>
+    <script>document.getElementById('content').focus();</script>
 @endsection

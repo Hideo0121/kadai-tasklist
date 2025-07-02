@@ -1,51 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold text-primary">
-            <i class="bi bi-clipboard-check-fill me-2"></i>タスクリスト
-        </h2>
-        <a href="{{ route('tasks.create') }}" class="btn btn-outline-success shadow-sm rounded-pill">
-            <i class="bi bi-plus-circle me-1"></i>新規タスク
-        </a>
+
+    <div class="flex justify-end items-center mt-8 mb-4 w-3/4 max-w-4xl mx-auto">
+        <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">新規作成</a>
     </div>
 
-    <div class="text-muted mb-3 small">
-        現在 {{ $tasks->count() }} 件のタスクがあります 📝
+    <div class="mb-3 text-blue-900 font-semibold w-3/4 max-w-4xl mx-auto">
+        　現在 {{ $tasks->count() }} 件のタスクがあります 📝
     </div>
 
     @if($tasks->isEmpty())
-        <div class="alert alert-warning text-center">
-            <i class="bi bi-exclamation-circle me-2"></i>まだタスクが登録されていません！
+        <div class="text-center text-blue-600 bg-blue-100 p-4 rounded shadow w-3/4 max-w-4xl mx-auto floating-card">
+            まだタスクが登録されていません！
         </div>
     @else
-        <div class="table-responsive">
-            <table class="table table-bordered align-middle text-center bg-white shadow-sm rounded">
-                <thead class="table-primary">
+        <div class="overflow-x-auto w-3/4 max-w-4xl mx-auto floating-card">
+            <table class="min-w-full bg-white rounded shadow">
+                <colgroup>
+                    <col style="width:54%">
+                    <col style="width:26%">
+                    <col style="width:20%">
+                </colgroup>
+                <thead class="bg-blue-200">
                     <tr>
-                        <th style="width: 70%">📌 内容</th>
-                        <th style="width: 15%">⏰ 状態</th>
-                        <th style="width: 15%">🔧 操作</th>
+                        <th class="py-2 px-6">内容</th>
+                        <th class="py-2 px-6">状態</th>
+                        <th class="py-2 px-4 w-40">操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tasks as $task)
-                        <tr>
-                            <td class="text-start">{{ \Illuminate\Support\Str::limit($task->content, 50) }}</td>
-                            <td>{{ $task->status }}</td>
-                            <td>
-                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-sm btn-outline-primary me-1">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-sm btn-outline-warning me-1">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="d-inline"  onsubmit="return confirm('本当に削除しますか？');">
+                        <tr class="border-b">
+                            <td class="py-2 px-6 text-left">{{ \Illuminate\Support\Str::limit($task->content, 50) }}</td>
+                            <td class="py-2 px-6">{{ $task->status }}</td>
+                            <td class="py-2 px-4 w-40 flex gap-2 justify-center">
+                                <a href="{{ route('tasks.edit', $task->id) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-sm">修正</a>
+                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('削除します。よろしいですか。');" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm">削除</button>
                                 </form>
                             </td>
                         </tr>

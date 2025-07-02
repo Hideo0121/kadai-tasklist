@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'BIZ UD Gothic', 'BIZ UDGothic', sans-serif;
+    background: #e3f0ff;
+}
+
+/* フローティングカード共通 */
+.floating-card {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+    border-radius: 1.2rem !important;
+    background: rgba(255,255,255,0.95) !important;
+    backdrop-filter: blur(2px);
+    border: 1px solid #e0e7ef;
+}
+
+/* ボタンやバナーの青色基調カスタム */
+.bg-blue-600, .bg-blue-700, .bg-blue-800, .bg-blue-900 {
+    background-color: #2563eb !important;
+}
+.text-blue-700, .text-blue-900 {
+    color: #1e40af !important;
+}
+.btn-primary, .bg-blue-500 {
+    background-color: #3b82f6 !important;
+    color: #fff !important;
+}
+.btn-primary:hover, .bg-blue-500:hover {
+    background-color: #2563eb !important;
+}
+.rounded {
+    border-radius: 0.5rem !important;
+}
+.shadow {
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
