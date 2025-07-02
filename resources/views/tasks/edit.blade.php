@@ -10,7 +10,7 @@
             @method('PUT')
             <div class="mb-4">
                 <label for="content" class="block font-semibold mb-1">タスク内容</label>
-                <input type="text" id="content" name="content" value="{{ old('content', $task->content) }}" placeholder="例）買い物に行く"
+                <input type="text" id="content" name="content" value="{{ old('content', $task->content) }}" placeholder="例）買い物に行く" inputmode="kana" lang="ja" autocomplete="on"
                     class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('content') border-red-500 @enderror" autofocus>
                 @error('content')
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -18,7 +18,7 @@
             </div>
             <div class="mb-4">
                 <label for="status" class="block font-semibold mb-1">状況</label>
-                <input type="text" id="status" name="status" value="{{ old('status', $task->status) }}" placeholder="例）未着手"
+                <input type="text" id="status" name="status" value="{{ old('status', $task->status) }}" placeholder="例）未着手" inputmode="kana" lang="ja" autocomplete="on"
                     class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('status') border-red-500 @enderror">
                 @error('status')
                     <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
