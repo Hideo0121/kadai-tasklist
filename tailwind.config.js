@@ -14,6 +14,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            spacing: {
+                '3.5': '0.875rem', // p-3.5 を追加
+            },
         },
     },
 
